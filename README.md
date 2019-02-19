@@ -33,16 +33,20 @@ $ yarn start
 
 After you start the application, you can use the exposed Rest API to:
 
-* Create User
-* Login
-* List Sequences
-* Create Sequence
-* Reset Sequence
-* Delete Sequence
-* Get Sequence Current value
-* Get Sequence Next value
+| Function               | Method | Route                      | Protected |
+| ---------------------- | ------ | -------------------------- | --------- |
+| Create User            | POST   | /api/user                  | false     |
+| Login                  | POST   | /api/user/login            | false     |
+| Logout                 | POST   | /api/user/logout           | true      |
+| List Sequences         | GET    | /api/sequence              | true      |
+| Create Sequence        | POST   | /api/sequence              | true      |
+| Reset Sequence         | PATCH  | /api/sequence/id           | true      |
+| Delete Sequence        | DELETE | /api/sequence/id           | true      |
+| Sequence Next value    | GET    | /api/sequence/slug/next    | true      |
+| Sequence Current value | GET    | /api/sequence/slug/current | true      |
 
-Also, there's a web interface available to manage everything. If you want to use the web interface, just open your browser to:
+
+There's also a web interface available to manage everything. If you want to use the web interface, just open your browser to:
 
 ```
 http://localhost:3000

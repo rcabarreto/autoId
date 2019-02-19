@@ -5,10 +5,9 @@
   "author": "Rodrigo Barreto <rcabarreto@gmail.com>",
   "scripts": {
     "start": "npm run front:build && npm run back:start",
-    "dev": "nodemon ./bin/www",
     "back:start": "node ./bin/www",
     "back:dev": "nodemon ./bin/www",
-    "front:start": "NODE_ENV=development webpack-dev-server --open",
+    "front:dev": "NODE_ENV=development webpack-dev-server --open",
     "front:build": "NODE_ENV=production webpack"
   },
   "repository": "git@github.com:rcabarreto/keyGenerator.git",
