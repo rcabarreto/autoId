@@ -5,9 +5,9 @@ import { sequenceActions } from '../../actions'
 import SequenceForm from './SequenceForm'
 import SequenceList from './SequenceList'
 
-const Dashboard = ({ token, dispatch }) => {
+const Dashboard = ({ dispatch }) => {
   useEffect(() => {
-    dispatch(sequenceActions.loadSequences(token))
+    dispatch(sequenceActions.loadSequences())
   })
 
   return (
@@ -20,6 +20,4 @@ const Dashboard = ({ token, dispatch }) => {
 }
 
 
-export default connect(state => ({
-  token: state.user.token,
-}))(Dashboard)
+export default connect()(Dashboard)

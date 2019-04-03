@@ -5,38 +5,41 @@ import { loaderActions, errorActions } from './index'
 
 export default {
 
-  loadSequences(token) {
+  loadSequences() {
     const request = () => ({ type: sequenceConstants.LOAD_SEQUENCES_REQUEST })
     const success = sequences => ({ type: sequenceConstants.LOAD_SEQUENCES_SUCCESS, sequences })
     const failure = error => ({ type: sequenceConstants.LOAD_SEQUENCES_FAILURE, error })
 
-    return (dispatch) => {
+    return (dispatch, getState) => {
+      const state = getState()
+
       dispatch(request())
       dispatch(errorActions.clearError())
       dispatch(loaderActions.showLoader())
 
-      sequenceService.loadSequences(token).then((sequences) => {
+      sequenceService.loadSequences(state.user.token).then((sequences) => {
         dispatch(success(sequences))
         dispatch(loaderActions.hideLoader())
       }).catch((error) => {
         dispatch(failure(error))
         dispatch(loaderActions.hideLoader())
         dispatch(errorActions.handleRequestFailure(error))
-        // toastr.error('Failure!', 'loadSubscriptions service error')
       })
     }
   },
 
-  addSequence(sequenceName, token) {
+  addSequence(sequenceName) {
     const request = () => ({ type: sequenceConstants.CREATE_SEQUENCE_REQUEST })
     const success = sequence => ({ type: sequenceConstants.CREATE_SEQUENCE_SUCCESS, sequence })
     const failure = error => ({ type: sequenceConstants.CREATE_SEQUENCE_FAILURE, error })
 
-    return (dispatch) => {
+    return (dispatch, getState) => {
+      const state = getState()
+
       dispatch(request())
       dispatch(loaderActions.showLoader())
 
-      sequenceService.addSequence(sequenceName, token).then((sequence) => {
+      sequenceService.addSequence(sequenceName, state.user.token).then((sequence) => {
         dispatch(success(sequence))
         dispatch(loaderActions.hideLoader())
         toastr.success('Nice!', 'Sequence created successfully')
@@ -48,16 +51,18 @@ export default {
     }
   },
 
-  deleteSequence(sequenceId, token) {
+  deleteSequence(sequenceId) {
     const request = () => ({ type: sequenceConstants.DELETE_SEQUENCE_REQUEST })
     const success = id => ({ type: sequenceConstants.DELETE_SEQUENCE_SUCCESS, id })
     const failure = error => ({ type: sequenceConstants.DELETE_SEQUENCE_FAILURE, error })
 
-    return (dispatch) => {
+    return (dispatch, getState) => {
+      const state = getState()
+
       dispatch(request())
       dispatch(loaderActions.showLoader())
 
-      sequenceService.deleteSequence(sequenceId, token).then(() => {
+      sequenceService.deleteSequence(sequenceId, state.user.token).then(() => {
         dispatch(success(sequenceId))
         dispatch(loaderActions.hideLoader())
         toastr.success('Nice!', 'Sequence deleted successfully')
@@ -69,16 +74,18 @@ export default {
     }
   },
 
-  resetSequence(sequenceId, newValue, token) {
+  resetSequence(sequenceId, newValue) {
     const request = () => ({ type: sequenceConstants.RESET_SEQUENCE_REQUEST })
     const success = sequence => ({ type: sequenceConstants.RESET_SEQUENCE_SUCCESS, sequence })
     const failure = error => ({ type: sequenceConstants.RESET_SEQUENCE_FAILURE, error })
 
-    return (dispatch) => {
+    return (dispatch, getState) => {
+      const state = getState()
+
       dispatch(request())
       dispatch(loaderActions.showLoader())
 
-      sequenceService.resetSequence(sequenceId, newValue, token).then((sequence) => {
+      sequenceService.resetSequence(sequenceId, newValue, state.user.token).then((sequence) => {
         dispatch(success(sequence))
         dispatch(loaderActions.hideLoader())
         toastr.success('Nice!', 'Sequence updated successfully')

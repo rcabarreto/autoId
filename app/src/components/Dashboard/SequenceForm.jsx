@@ -3,13 +3,13 @@ import { connect } from 'react-redux'
 
 import { sequenceActions } from '../../actions'
 
-const AddSequence = ({ token, dispatch }) => {
+const AddSequence = ({ dispatch }) => {
   const [sequenceName, setSequenceName] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    dispatch(sequenceActions.addSequence(sequenceName, token))
+    dispatch(sequenceActions.addSequence(sequenceName))
     setSequenceName('')
   }
 
@@ -28,6 +28,4 @@ const AddSequence = ({ token, dispatch }) => {
 }
 
 
-export default connect(state => ({
-  token: state.user.token,
-}))(AddSequence)
+export default connect()(AddSequence)

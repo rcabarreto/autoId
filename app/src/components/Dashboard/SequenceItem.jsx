@@ -26,13 +26,13 @@ const SequenceItem = ({
 
   const handleDeleteItem = () => {
     setShowConfirmModal(false)
-    dispatch(sequenceActions.deleteSequence(id, token))
+    dispatch(sequenceActions.deleteSequence(id))
   }
 
   const handleResetValue = (newValue) => {
     setShowFormModal(false)
     console.log('newValue', newValue)
-    dispatch(sequenceActions.resetSequence(id, newValue, token))
+    dispatch(sequenceActions.resetSequence(id, newValue))
   }
 
 
